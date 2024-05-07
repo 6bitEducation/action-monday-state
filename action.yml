@@ -46,5 +46,5 @@ outputs:
   message:
     description: "A markdown formatted text that informs about the mentioned items"
 runs:
-  using: "node12"
+  using: "node20"
   main: "dist/index.js"
