@@ -1,7 +1,7 @@
 import mondaySdk from 'monday-sdk-js';
 
 import assert from 'assert';
-import { get } from 'lodash';
+import get from 'lodash/get.js';
 import * as core from "@actions/core";
 
 const monday = mondaySdk();
@@ -13,6 +13,7 @@ const monday = mondaySdk();
 function initializeSdk(token) {
   assert.ok(!!token, 'Monday Token is required');
   monday.setToken(token);
+  monday.setApiVersion("2024-04");
 }
 
 /**
@@ -81,7 +82,7 @@ async function boardByItem(itemId) {
 async function columnIdByTitle(boardId, columnTitle) {
   const columnQuery = await monday.api(`query {
     boards (ids: ${boardId}) {
-      columns () { title, id }
+      columns { title, id }
     }
   }`);
   const columns = get(columnQuery, 'data.boards[0].columns');
@@ -100,7 +101,7 @@ async function columnIdByTitle(boardId, columnTitle) {
 async function getItemStatus(itemId, columnId) {
   const statusQuery = await monday.api(`query {
     items (ids: ${itemId}) {
-      column_values (ids: ${columnId}) {
+      column_values (ids: "${columnId}") {
         text
       }
     }
@@ -135,7 +136,7 @@ async function getItemName(itemId) {
 async function updateItemStatus(itemId, boardId, columnId, columnStatus) {
   const mutationQuery = await monday.api(`mutation change_column_value($value: JSON!) {
     change_column_value (item_id: ${itemId}, board_id: ${boardId}, column_id: "${columnId}", value: $value) {
-        column_values (ids: ${columnId}) { text }
+        column_values (ids: "${columnId}") { text }
     }
   }`, { variables: { value: JSON.stringify({ label: columnStatus }) } });
   const newStatus = get(mutationQuery, 'data.change_column_value.column_values[0].text');
