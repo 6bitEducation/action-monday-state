@@ -6,7 +6,7 @@
     "dist/*"
   ],
   "scripts": {
-    "build": "ncc build src/index.js -o dist --source-map",
+    "build": "ncc build src/index.ts -o dist --source-map",
     "test": "jest --runInBand"
   },
   "repository": {
@@ -38,7 +38,8 @@
     "@babel/preset-env": "^7.16.11",
     "@vercel/ncc": "^0.38.1",
     "babel-jest": "^29.7.0",
-    "jest": "^29.7.0"
+    "jest": "^29.7.0",
+    "typescript": "^5.4.5"
   },
   "jestSonar": {
     "reportPath": "reports/coverage",

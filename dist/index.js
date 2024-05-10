@@ -32278,7 +32278,7 @@ module.exports = Multipart
 "use strict";
 
 
-const Decoder = __nccwpck_require__(7100)
+const Decoder = __nccwpck_require__(7455)
 const decodeText = __nccwpck_require__(4619)
 const getLimit = __nccwpck_require__(1467)
 
@@ -32470,7 +32470,7 @@ module.exports = UrlEncoded
 
 /***/ }),
 
-/***/ 7100:
+/***/ 7455:
 /***/ ((module) => {
 
 "use strict";
@@ -33246,9 +33246,7 @@ async function action({
   action,
 });
 
-;// CONCATENATED MODULE: ./src/index.js
-
-
+;// CONCATENATED MODULE: ./src/index.ts
 
 
 const mondayToken = core.getInput('monday-token');
@@ -33259,36 +33257,32 @@ const prefix = core.getInput('prefix');
 const postfix = core.getInput('postfix');
 const src_status = core.getInput('set-status');
 const statusBefore = core.getInput('require-status');
-const multiple = core.getBooleanInput('multiple')
+const multiple = core.getBooleanInput('multiple');
 const mondayOrganization = core.getInput('monday-organization');
 const doNotFail = core.getBooleanInput('allow-no-item-id');
-
 const config = {
-  mondayToken,
-  text: src_text,
-  statusColumnTitle,
-  statusColumnId,
-  prefix,
-  postfix,
-  statusBefore,
-  status: src_status,
-  multiple,
-  mondayOrganization,
-  doNotFail,
-}
-
+    mondayToken,
+    text: src_text,
+    statusColumnTitle,
+    statusColumnId,
+    prefix,
+    postfix,
+    statusBefore,
+    status: src_status,
+    multiple,
+    mondayOrganization,
+    doNotFail,
+};
 src_monday.action(config)
-  .then(({ itemIds, message }) => {
-    core.info(`Successfully updated status of item with ID ${JSON.stringify(itemIds)}`)
+    .then(({ itemIds, message }) => {
+    core.info(`Successfully updated status of item with ID ${JSON.stringify(itemIds)}`);
     core.setOutput("item-ids", JSON.stringify(itemIds));
     core.setOutput('message', message);
-  })
-  .catch((error) => {
+})
+    .catch((error) => {
     core.error(error);
     core.setFailed(error.message);
-  })
-
-
+});
 
 })();
 
