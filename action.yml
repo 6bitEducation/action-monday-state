@@ -8,20 +8,32 @@ inputs:
   monday-token:
     description: 'API Access token for monday.com'
     required: true
+  board-id:
+    description: 'ID of the Monday board'
+    required: true
   text:
     description: 'Text that includes the Item ID. Example for PR Title: github.event.pull_request.title'
-    required: true
-  status-column-title:
-    description: 'Title of column of which status shall be updated'
-    required: false
-  status-column-id:
-    description: 'ID of column of which status shall be updated'
     required: false
   prefix:
     description: 'String that must occur right before the item ID, like "#(" for fix(#1234567890)'
     required: false
   postfix:
     description: 'String that must occur right after the item ID, like ")" for fix(#1234567890)'
+    required: false
+  status-column-id:
+    description: 'ID of column of which status shall be updated'
+    required: false
+  status-column-title:
+    description: 'Title of column of which status shall be updated'
+    required: false
+  column-value:
+    description: 'Value to search for in search column'
+    required: false
+  search-column-id:
+    description: 'ID of column of which to search in to find the item'
+    required: false
+  search-column-title:
+    description: 'Title of column of which to search in to find the item'
     required: false
   set-status:
     description: 'Item-Status text that shall be set'
