@@ -46,10 +46,12 @@ async function findItems({
   columnValue: string
 }) {
   type Result = {
-    cursor: string | null
-    items: {
-      id: string
-    }[]
+    items_page_by_column_values: {
+      cursor: string | null
+      items: {
+        id: string
+      }[]
+    }
 
   }
   const result = await monday.api<Result>(
@@ -74,7 +76,7 @@ async function findItems({
     },
   )
 
-  return result.data.items
+  return result.data.items_page_by_column_values.items
 }
 
 async function getItemStatus(itemId: string, columnId: string) {
