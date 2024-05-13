@@ -29539,7 +29539,7 @@ async function findItems({ boardId, columnId, columnValue, }) {
                 }],
         },
     });
-    return result.data.items;
+    return result.data.items_page_by_column_values.items;
 }
 async function getItemStatus(itemId, columnId) {
     const result = await monday.api(`query {
